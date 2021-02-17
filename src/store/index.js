@@ -13,7 +13,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 
-// store.dispatch(fetchCategories());
+store.dispatch(fetchCategories());
 // store.dispatch(fetchIngredients());
 // store.dispatch(fetchRecipes());
 

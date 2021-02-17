@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import category from "./categoryReducer";
+import category from "./categoryReducers";
 import ingredient from "./ingredientReducer";
 import recipe from "./recipeReducer";
 

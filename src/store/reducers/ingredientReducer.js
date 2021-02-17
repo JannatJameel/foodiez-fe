@@ -1,3 +1,5 @@
+import * as types from "../actions/types";
+
 const initialState = {
     ingredients: [],
     loading: true
@@ -5,13 +7,13 @@ const initialState = {
 
 const ingredientReducer = (state=initialState, action) => {
     switch (action.type){
-        case "FETCH_INGREDIENTS":
+        case types.FETCH_INGREDIENTS:
             return {
                 ...state,
                 ingredients: action.payload.ingredients, 
                 loading: false
             };
-        case "CREATE_INGREDIENT":
+        case types.CREATE_INGREDIENT:
             const {newIngredient} = action.payload;
             return{
                 ...state, 

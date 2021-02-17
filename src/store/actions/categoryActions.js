@@ -3,6 +3,7 @@ import * as types from "./types";
 
 export const fetchCategories = () => {
     return async (dispatch) => {
+    console.log("Helloooo");
         try {
             const res = await instance.get("/categories");
             dispatch({
