@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 // Components 
 import CategoryTab from "./CategoryTab";
 import RecipeTab from "./RecipeTab";
+import RecipeForm from "./RecipeForm"
 
 
 const Routes = () => {
@@ -14,9 +15,13 @@ const Routes = () => {
             <Route path="/categories">
                 <CategoryTab/>
             </Route>
+            <Route path="/recipes/new">
+                <RecipeForm/>
+            </Route>
             <Route path="/recipes">
                 <RecipeTab/>
             </Route>
+          
         </Switch>
     );
 };
