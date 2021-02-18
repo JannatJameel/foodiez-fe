@@ -1,12 +1,11 @@
 // Styling
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
 // Components
 import CategoryButton from "./CategoryButton";
 import IngredientButton from "./IngredientButton";
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,11 +14,11 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
     fontWeight: "bold",
-    marginLeft: 22
+    marginLeft: 22,
   },
 }));
 
-const CategoryBar = () => {
+const CategoryBar = ({ categoryId }) => {
   const classes = useStyles();
 
   return (
@@ -29,8 +28,8 @@ const CategoryBar = () => {
           <Typography variant="h5" className={classes.title}>
             Categories
           </Typography>
-          <CategoryButton/>
-          <IngredientButton/>
+          <CategoryButton />
+          <IngredientButton categoryId={categoryId} />
         </Toolbar>
       </AppBar>
     </div>

@@ -1,17 +1,16 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 // Styling
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
 // Components
-import IngredientList from "./IngredientList"
-import CategoryBar from "./CategoryBar"
-
+import IngredientList from "./IngredientList";
+import CategoryBar from "./CategoryBar";
 
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
@@ -31,7 +30,7 @@ const TabPanel = (props) => {
       )}
     </div>
   );
-}
+};
 
 TabPanel.propTypes = {
   children: PropTypes.node,
@@ -42,31 +41,31 @@ TabPanel.propTypes = {
 const a11yProps = (index) => {
   return {
     id: `scrollable-auto-tab-${index}`,
-    'aria-controls': `scrollable-auto-tabpanel-${index}`,
+    "aria-controls": `scrollable-auto-tabpanel-${index}`,
   };
-}
+};
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    width: '100%',
+    width: "100%",
     height: "20%",
     backgroundColor: theme.palette.background.paper,
   },
 }));
 
 const CategoryTab = () => {
-    const categories = useSelector(state => state.category.categories);
-    const classes = useStyles();
-    const [value, setValue] = useState(0);
+  const categories = useSelector((state) => state.category.categories);
+  const classes = useStyles();
+  const [value, setValue] = useState(0);
 
-    const handleChange = (event, newValue) => {
+  const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   return (
     <Box className={classes.root} position="sticky">
-        <CategoryBar/>
+      <CategoryBar categoryId={categories[value].id} />
       <AppBar position="static" color="default">
         <Tabs
           value={value}
@@ -77,18 +76,20 @@ const CategoryTab = () => {
           scrollButtons="auto"
           aria-label="scrollable auto tabs example"
         >
-        {categories.map((category, i) => <Tab label={category.name} {...a11yProps(i)} key={i}/>)}
+          {categories.map((category, i) => (
+            <Tab label={category.name} {...a11yProps(i)} key={i} />
+          ))}
         </Tabs>
       </AppBar>
-        
-        <TabPanel value={value} index={value}>
-            <IngredientList ingredients={categories[value].ingredients}/>
-        </TabPanel>
-        {/* <TabPanel value={value} index={categories.length}>
+
+      <TabPanel value={value} index={value}>
+        <IngredientList categoryId={categories[value].id} />
+      </TabPanel>
+      {/* <TabPanel value={value} index={categories.length}>
             Hellooo
         </TabPanel> */}
     </Box>
   );
-}
+};
 
 export default CategoryTab;
