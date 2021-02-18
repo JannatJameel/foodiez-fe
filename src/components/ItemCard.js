@@ -1,3 +1,5 @@
+import { useLocation } from 'react-router-dom'
+// Styling 
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -23,28 +25,31 @@ const useStyles = makeStyles({
   },
 });
 
-const IngredientCard = ({ ingredient }) => {
+const ItemCard = ({ item }) => {
+  const location = useLocation();
+  const currentPath = location.pathname;
+  
   const classes = useStyles();
 
-  if (!ingredient) {
-    return <p>Waiting for ingredient</p>;
+  if (!item) {
+    return <p>Waiting for {currentPath}</p>;
   }
   return (
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
           component="img"
-          alt={ingredient.name}
+          alt={item.name}
           height="250"
-          image={ingredient.image}
-          title={ingredient.name}
+          image={item.image}
+          title={item.name}
         />
         <GridListTileBar
           classes={{
             root: classes.titleBar,
             title: classes.title,
           }}
-          title={ingredient.name}
+          title={item.name}
         />
       </CardActionArea>
 
@@ -60,4 +65,4 @@ const IngredientCard = ({ ingredient }) => {
   );
 };
 
-export default IngredientCard;
+export default ItemCard;

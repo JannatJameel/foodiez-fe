@@ -9,6 +9,9 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { useDispatch } from "react-redux";
 import { createCategory } from "../store/actions/categoryActions";
+import AddIcon from '@material-ui/icons/Add';
+
+
 
 const CategoryButton = () => {
   const dispatch = useDispatch();
@@ -38,8 +41,8 @@ const CategoryButton = () => {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Add Category
+      <Button variant="outlined" onClick={handleClickOpen} startIcon={<AddIcon/>}>
+        Category
       </Button>
       <Dialog
         open={open}

@@ -29,4 +29,4 @@ export const createCategory = (newRecipe) => {
             console.log("error:", error);
         }
     }
-}
+};

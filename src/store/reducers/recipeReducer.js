@@ -17,7 +17,7 @@ const recipeReducer = (state=initialState, action) => {
             const {newRecipe} = action.payload;
             return{
                 ...state, 
-                categories: [...state.recipes, newRecipe]
+                recipes: [...state.recipes, newRecipe]
             };
         default: return state;
     };

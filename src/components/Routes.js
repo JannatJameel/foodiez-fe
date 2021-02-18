@@ -2,7 +2,7 @@ import { Route, Switch } from "react-router";
 import { useSelector } from "react-redux";
 // Components 
 import CategoryTab from "./CategoryTab";
-
+import RecipeTab from "./RecipeTab";
 
 
 const Routes = () => {
@@ -12,7 +12,10 @@ const Routes = () => {
     return (
         <Switch>
             <Route path="/categories">
-            <CategoryTab/>
+                <CategoryTab/>
+            </Route>
+            <Route path="/recipes">
+                <RecipeTab/>
             </Route>
         </Switch>
     );

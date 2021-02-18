@@ -10,10 +10,9 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { useDispatch } from "react-redux";
 import { createIngredient } from "../store/actions/ingredientActions";
-import {
-  fetchCategories,
-  updateCategory,
-} from "../store/actions/categoryActions";
+import AddIcon from '@material-ui/icons/Add';
+
+
 
 const IngredientButton = ({ categoryId }) => {
   const dispatch = useDispatch();
@@ -54,8 +53,8 @@ const IngredientButton = ({ categoryId }) => {
   return (
     <div>
       <Box ml={2} mr={4}>
-        <Button variant="outlined" onClick={handleClickOpen}>
-          Add Ingredient
+        <Button variant="outlined" onClick={handleClickOpen} startIcon={<AddIcon/>}>
+          Ingredient
         </Button>
       </Box>
       <Dialog

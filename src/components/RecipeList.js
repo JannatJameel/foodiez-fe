@@ -2,7 +2,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 // Components
-import ItemCard from "./ItemCard";
+import Card from "./ItemCard";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,20 +17,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const IngredientList = ({ categoryId }) => {
+const IngredientList = () => {
   const classes = useStyles();
 
-  const ingredients = useSelector(
-    (state) => state.ingredient.ingredients
-  ).filter((ingredient) => ingredient.categoryId === categoryId);
+  const recipes = useSelector((state) => state.recipe.recipes);
 
-  if (!ingredients) {
-    return <p>Waiting for ingredients</p>;
+  if (!recipes) {
+    return <p>Waiting for recipes</p>;
   }
   return (
     <div className={classes.root}>
-      {ingredients.map((ingredient) => (
-        <ItemCard item={ingredient} key={ingredient.id} />
+      {recipes.map((recipe) => (
+        <Card item={recipe} key={recipe.id} />
       ))}
     </div>
   );

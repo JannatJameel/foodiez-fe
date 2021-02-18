@@ -3,9 +3,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-// Components
-import CategoryButton from "./CategoryButton";
-import IngredientButton from "./IngredientButton";
+import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
+import AddIcon from '@material-ui/icons/Add';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CategoryBar = ({ categoryId }) => {
+const RecipeBar = () => {
   const classes = useStyles();
 
   return (
@@ -26,14 +27,15 @@ const CategoryBar = ({ categoryId }) => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h5" className={classes.title}>
-            Categories
+            Recipes
           </Typography>
-          <CategoryButton />
-          <IngredientButton categoryId={categoryId} />
+          <Box mr={4}>
+            <Button variant="outlined" startIcon={<AddIcon/>}>Recipe</Button>
+          </Box>
         </Toolbar>
       </AppBar>
     </div>
   );
 };
 
-export default CategoryBar;
+export default RecipeBar;

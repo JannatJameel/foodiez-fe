@@ -10,7 +10,8 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 // Components
 import IngredientList from "./IngredientList";
-import CategoryBar from "./CategoryBar";
+import RecipeList from "./RecipeList";
+import RecipeBar from "./RecipeBar";
 
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
@@ -54,8 +55,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CategoryTab = () => {
-  const categories = useSelector((state) => state.category.categories);
+const RecipeTab = () => {
+  const recipes = useSelector((state) => state.recipe.recipes);
   const classes = useStyles();
   const [value, setValue] = useState(0);
 
@@ -65,7 +66,7 @@ const CategoryTab = () => {
 
   return (
     <Box className={classes.root} position="sticky">
-      <CategoryBar categoryId={categories[value].id} />
+      <RecipeBar/>
       <AppBar position="static" color="default">
         <Tabs
           value={value}
@@ -76,18 +77,19 @@ const CategoryTab = () => {
           scrollButtons="auto"
           aria-label="scrollable auto tabs example"
         >
-          {categories.map((category, i) => (
-            <Tab label={category.name} {...a11yProps(i)} key={i} />
-          ))}
+          {/* {recipes.map((recipe, i) => (
+            <Tab label={recipe.name} {...a11yProps(i)} key={i} />
+          ))} */}
         </Tabs>
       </AppBar>
 
       <TabPanel value={value} index={value}>
-        <IngredientList categoryId={categories[value].id} />
+        {/* <IngredientList recipeId={recipes[value].id} /> */}
+        <RecipeList/>
       </TabPanel>
- 
+
     </Box>
   );
 };
 
-export default CategoryTab;
+export default RecipeTab;

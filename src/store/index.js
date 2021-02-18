@@ -14,6 +14,6 @@ const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 
 store.dispatch(fetchCategories());
 store.dispatch(fetchIngredients());
-// store.dispatch(fetchRecipes());
+store.dispatch(fetchRecipes());
 
 export default store;
