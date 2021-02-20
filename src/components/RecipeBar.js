@@ -11,11 +11,13 @@ import { Link } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    backgroundColor: theme.palette.warning.light,
   },
   title: {
     flexGrow: 1,
     fontWeight: "bold",
     marginLeft: "1.5%",
+    color: "black",
   },
 }));
 
@@ -23,19 +25,19 @@ const RecipeBar = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
+    <div >
+      <AppBar position="static" className={classes.root}>
         <Toolbar>
           <Typography variant="h5" className={classes.title}>
             Recipes
           </Typography>
-          <Link to="/recipes/new">
             <Box mr={4}>
+            <Link to="/recipes/new" style={{textDecoration: "none"}}>
               <Button variant="outlined" startIcon={<AddIcon />}>
                 Recipe
               </Button>
+            </Link>
             </Box>
-          </Link>
         </Toolbar>
       </AppBar>
     </div>

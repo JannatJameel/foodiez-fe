@@ -21,9 +21,10 @@ export const createRecipe = (newRecipe) => {
       const formData = new FormData();
       for (const Key in newRecipe) formData.append(Key, newRecipe[Key]);
       const res = await instance.post(`/recipes`, formData);
+      const fullResp = await instance.get(`/recipes/${res.data.id}`)
       dispatch({
         type: types.CREATE_RECIPE,
-        payload: { newRecipe: res.data },
+        payload: { newRecipe: fullResp },
       });
     } catch (error) {
       console.log("error:", error);

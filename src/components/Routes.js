@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import CategoryTab from "./CategoryTab";
 import RecipeTab from "./RecipeTab";
 import RecipeForm from "./RecipeForm";
+import RecipeDetail from "./recipePage/RecipeDetail";
+import HomePage from "./home/HomePage";
 import Loading from "./Loading";
 
 const Routes = () => {
@@ -12,14 +14,20 @@ const Routes = () => {
   if (loading) return <Loading />;
   return (
     <Switch>
-      <Route path="/categories">
-        <CategoryTab />
-      </Route>
-      <Route path="/recipes/new">
+      <Route exact path="/recipes/new">
         <RecipeForm />
+      </Route>
+      <Route path="/recipes/:recipeSlug">
+        <RecipeDetail/>
       </Route>
       <Route path="/recipes">
         <RecipeTab />
+      </Route>
+      <Route path="/ingredients">
+        <CategoryTab />
+      </Route>
+      <Route exact path="/">
+        <HomePage />
       </Route>
     </Switch>
   );

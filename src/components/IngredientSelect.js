@@ -23,7 +23,6 @@ const IngredientSelect = ({ ingredient, ingredients, setIngredients }) => {
       setIngredients([...ingredients, foundIngredient.id]);
     }
   };
-  console.log(ingredients);
 
   if (!foundIngredient) return <p>Wait for Ingredients</p>;
   return (

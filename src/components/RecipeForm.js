@@ -1,4 +1,8 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { createRecipe } from "../store/actions/recipeActions";
+// Styling
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -7,10 +11,11 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import AddIcon from "@material-ui/icons/Add";
+import CloseIcon from '@material-ui/icons/Close';
+import Container from '@material-ui/core/Container';
 // Components
 import CategoryAccordion from "./CategoryAccordion";
-import { useState } from "react";
-import { createRecipe } from "../store/actions/recipeActions";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,14 +33,17 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     fontWeight: "bold",
     marginLeft: "1.5%",
+    color: "black",
   },
+  bar: {
+    backgroundColor: theme.palette.warning.light,
+  }
 }));
 
 const RecipeForm = () => {
   const classes = useStyles();
-
   const dispatch = useDispatch();
-
+  const history = useHistory();
   const categories = useSelector((state) => state.category.categories);
 
   const [recipe, setRecipe] = useState({
@@ -46,9 +54,6 @@ const RecipeForm = () => {
 
   const [ingredients, setIngredients] = useState([]);
 
-  const x = "2,4";
-  console.log(x.split(","));
-
   const handleChange = (event) => {
     setRecipe({ ...recipe, [event.target.name]: event.target.value });
   };
@@ -58,17 +63,30 @@ const RecipeForm = () => {
   };
 
   const handleSubmit = () => {
-    console.log({ ...recipe, ingredients: ingredients });
     dispatch(createRecipe({ ...recipe, ingredients: ingredients }));
+    history.push(`/recipes`);
+  };
+
+  const handleCancel = () => {
+    history.push(`/recipes`);
   };
 
   return (
     <div>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.bar}>
         <Toolbar>
           <Typography variant="h5" className={classes.title}>
             New Recipe
           </Typography>
+          <Box mr={2}>
+            <Button
+              variant="outlined"
+              endIcon={<CloseIcon />}
+              onClick={handleCancel}
+            >
+              Cancel
+            </Button>
+          </Box>
           <Box mr={4}>
             <Button
               variant="outlined"
@@ -80,46 +98,58 @@ const RecipeForm = () => {
           </Box>
         </Toolbar>
       </AppBar>
-      <form className={classes.root} noValidate autoComplete="off">
-        <div>
-          <TextField
-            required
-            id="outlined-required"
-            label="Recipe Name"
-            variant="outlined"
-            name="name"
-            value={recipe.name}
-            onChange={handleChange}
-          />
-          <div className={classes.column}>
-            <input
-              accept="image/*"
-              className={classes.input}
-              id="icon-button-file"
-              type="file"
-              onChange={handleImage}
-            />
+      <Container>
+        <form className={classes.root} noValidate autoComplete="off">
+          <div>
+            <Box mt={5} mb={5}>
+              <TextField
+                required
+                id="outlined-required"
+                label="Recipe Name"
+                variant="outlined"
+                value={recipe.name}
+                name="name"
+                onChange={handleChange}
+              />
+            </Box>
+            <Box mb={2}>
+              <TextField
+                id="outlined-flexible"
+                type="file"
+                fullWidth
+                variant="outlined"
+                onChange={handleImage}
+                helperText="upload an image for the recipe"
+              />
+            </Box>
+            <Box mb={5}>
+              <TextField
+                id="outlined-multiline-flexible"
+                label="Recipe Method"
+                multiline
+                rowsMax={10}
+                value={recipe.method}
+                onChange={handleChange}
+                variant="outlined"
+                name="method"
+                helperText="write the recipe steps seperated by ,"
+              />
+            </Box>
           </div>
-          <TextField
-            id="outlined-multiline-flexible"
-            label="Method"
-            multiline
-            rowsMax={10}
-            name="method"
-            value={recipe.method}
-            onChange={handleChange}
-            variant="outlined"
-            helperText="write the recipe steps seperated by ,"
-          />
-        </div>
-      </form>
-      {categories.map((category) => (
-        <CategoryAccordion
-          category={category}
-          ingredients={ingredients}
-          setIngredients={setIngredients}
-        />
-      ))}
+        </form>
+        <Box ml={2} mr={2}>
+          <h5>Select the required ingredients:</h5>
+          {categories.map((category) => (
+            <Box mb={3}>
+              <CategoryAccordion
+                category={category}
+                ingredients={ingredients}
+                setIngredients={setIngredients}
+              />
+            </Box>
+          ))}
+        </Box>
+      </Container>
     </div>
   );
 };

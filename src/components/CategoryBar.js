@@ -10,11 +10,13 @@ import IngredientButton from "./IngredientButton";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    backgroundColor: theme.palette.warning.light,
   },
   title: {
     flexGrow: 1,
     fontWeight: "bold",
     marginLeft: "1.5%",
+    color: "black"
   },
 }));
 
@@ -22,11 +24,11 @@ const CategoryBar = ({ categoryId }) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
+    <div>
+      <AppBar position="static" className={classes.root}>
         <Toolbar>
           <Typography variant="h5" className={classes.title}>
-            Categories
+            Ingredients
           </Typography>
           <CategoryButton />
           <IngredientButton categoryId={categoryId} />
