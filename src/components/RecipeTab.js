@@ -1,15 +1,9 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
 // Styling
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 // Components
-import IngredientList from "./IngredientList";
 import RecipeList from "./RecipeList";
 import RecipeBar from "./RecipeBar";
 
@@ -39,13 +33,6 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-const a11yProps = (index) => {
-  return {
-    id: `scrollable-auto-tab-${index}`,
-    "aria-controls": `scrollable-auto-tabpanel-${index}`,
-  };
-};
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -56,38 +43,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const RecipeTab = () => {
-  const recipes = useSelector((state) => state.recipe.recipes);
   const classes = useStyles();
-  const [value, setValue] = useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
 
   return (
     <Box className={classes.root} position="sticky">
-      <RecipeBar/>
-      <AppBar position="static" color="default">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-          variant="scrollable"
-          scrollButtons="auto"
-          aria-label="scrollable auto tabs example"
-        >
-          {/* {recipes.map((recipe, i) => (
-            <Tab label={recipe.name} {...a11yProps(i)} key={i} />
-          ))} */}
-        </Tabs>
-      </AppBar>
-
-      <TabPanel value={value} index={value}>
-        {/* <IngredientList recipeId={recipes[value].id} /> */}
-        <RecipeList/>
-      </TabPanel>
-
+      <RecipeBar />
+      <RecipeList />
     </Box>
   );
 };
